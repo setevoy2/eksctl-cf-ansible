@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+packed-eks-stacks.json
+.idea/

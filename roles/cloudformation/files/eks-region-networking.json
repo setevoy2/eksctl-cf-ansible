@@ -7,7 +7,11 @@
     "VPCCIDRBlock": {
       "Description": "VPC CidrBlock",
       "Type": "String"
-    }
+    },
+    "EKSClusterName": {
+      "Description": "EKS cluster name",
+      "Type": "String"
+   }
 
   },
 
@@ -24,7 +28,7 @@
             "Key" : "Name",
             "Value" : { "Fn::Join" : [ "-", [ {"Ref" : "AWS::StackName"}, "vpc"] ] } },
           {
-            "Key" : { "Fn::Join" : [ "", [ "kubernetes.io/cluster/", {"Ref" : "AWS::StackName"}] ] },
+            "Key" : { "Fn::Join" : [ "", [ "kubernetes.io/cluster/", {"Ref" : "EKSClusterName"}] ] },
             "Value" : "owned"
           }
         ]

@@ -8,7 +8,13 @@
       "Description": "VPC CidrBlock",
       "Type": "String",
       "Default": "10.0.0.0/16"
-    }
+    },
+
+    "EKSClusterName": {
+      "Description": "EKS cluster name",
+      "Type": "String"
+   }
+
   },
 
   "Mappings": {
@@ -32,7 +38,8 @@
       "Properties": {
         "TemplateURL": "eks-region-networking.json",
         "Parameters": {
-          "VPCCIDRBlock": { "Ref": "VPCCIDRBlock" }
+          "VPCCIDRBlock": { "Ref": "VPCCIDRBlock" },
+          "EKSClusterName": { "Ref": "EKSClusterName"}
         }
       }
     },
@@ -45,6 +52,7 @@
           "VPCID": { "Fn::GetAtt": ["RegionNetworkStack", "Outputs.VPCID"] },
           "AZ": { "Fn::Select": [ "0", { "Fn::GetAZs": "" } ] },
           "IGWID": { "Fn::GetAtt": ["RegionNetworkStack", "Outputs.IGWID"] },
+          "EKSClusterName": { "Ref": "EKSClusterName"},
           "PublicSubnetCIDR": {
             "Fn::Join" : [".", [
               { "Fn::Select": [ "0", { "Fn::Split": [".",  { "Ref": "VPCCIDRBlock"} ] } ] },
@@ -70,6 +78,7 @@
           "VPCID": { "Fn::GetAtt": ["RegionNetworkStack", "Outputs.VPCID"] },
           "AZ": { "Fn::Select": [ "1", { "Fn::GetAZs": "" } ] },
           "IGWID": { "Fn::GetAtt": ["RegionNetworkStack", "Outputs.IGWID"] },
+          "EKSClusterName": { "Ref": "EKSClusterName"},
           "PublicSubnetCIDR": {
             "Fn::Join" : [".", [
               { "Fn::Select": [ "0", { "Fn::Split": [".",  { "Ref": "VPCCIDRBlock"} ] } ] },

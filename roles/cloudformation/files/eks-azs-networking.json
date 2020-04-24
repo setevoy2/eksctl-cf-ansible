@@ -7,6 +7,10 @@
       "Description": "VPC for resources",
       "Type": "String"
     },
+    "EKSClusterName": {
+      "Description": "EKS cluster name",
+      "Type": "String"
+    },
     "PublicSubnetCIDR": {
       "Description": "PublicSubnetCIDR",
       "Type": "String"
@@ -39,7 +43,7 @@
             "Value" : { "Fn::Join" : [ "-", [ {"Ref" : "AWS::StackName"}, "public-net", { "Ref": "AZ" } ] ] }
           },
           {
-            "Key" : { "Fn::Join" : [ "", [ "kubernetes.io/cluster/", {"Ref" : "AWS::StackName"}] ] },
+            "Key" : { "Fn::Join" : [ "", [ "kubernetes.io/cluster/", {"Ref" : "EKSClusterName"}] ] },
             "Value" : "shared"
           },
           {
@@ -62,7 +66,7 @@
             "Value" : { "Fn::Join" : [ "-", [ {"Ref" : "AWS::StackName"}, "private-net", { "Ref": "AZ" } ] ] }
           },
           {
-            "Key" : { "Fn::Join" : [ "", [ "kubernetes.io/cluster/", {"Ref" : "AWS::StackName"}] ] },
+            "Key" : { "Fn::Join" : [ "", [ "kubernetes.io/cluster/", {"Ref" : "EKSClusterName"}] ] },
             "Value" : "shared"
           },
           {
